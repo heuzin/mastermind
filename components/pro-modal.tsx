@@ -71,7 +71,9 @@ const ProModal = () => {
       const response = await axios.get("/api/stripe");
 
       window.location.href = response.data.url;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
+      console.log(error, "STRIPE_CLIENT_ERROR");
       //   toast.error("Something went wrong.");
     } finally {
       setLoading(false);

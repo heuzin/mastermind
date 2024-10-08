@@ -40,7 +40,7 @@ const routes = [
     color: "text-pink-700",
   },
   {
-    label: "Videio Generation",
+    label: "Video Generation",
     icon: VideoIcon,
     href: "/video",
     color: "text-orange-700",
@@ -66,9 +66,13 @@ const routes = [
 
 interface SideBarProps {
   apiLimitCount: number;
+  isPro: boolean;
 }
 
-const Sidebar: React.FC<SideBarProps> = ({ apiLimitCount = 0 }) => {
+const Sidebar: React.FC<SideBarProps> = ({
+  apiLimitCount = 0,
+  isPro = false,
+}) => {
   const pathname = usePathname();
 
   return (
@@ -102,7 +106,7 @@ const Sidebar: React.FC<SideBarProps> = ({ apiLimitCount = 0 }) => {
           ))}
         </div>
       </div>
-      <FreeCounter apiLimitCount={apiLimitCount} />
+      <FreeCounter apiLimitCount={apiLimitCount} isPro={isPro} />
     </div>
   );
 };
