@@ -5,6 +5,7 @@ import * as z from "zod";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { cn } from "@/lib/utils";
+import toast from "react-hot-toast";
 import { Code } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -53,9 +54,12 @@ const CodePage = () => {
 
       setMessages((current) => [...current, userMessage, response.data]);
       form.reset();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error?.response?.status === 403) {
         proModal.onOpen();
+      } else {
+        toast.error("Something went wrong");
       }
     } finally {
       router.refresh();
@@ -128,11 +132,13 @@ const CodePage = () => {
 
                 <ReactMarkdown
                   components={{
+                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
                     pre: ({ node, ...props }) => (
                       <div className="overflow-auto w-full my-2 bg-black/10 p-2 rounded-lg">
                         <pre {...props} />
                       </div>
                     ),
+                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
                     code: ({ node, ...props }) => (
                       <code className="bg-black/10 rounded-lg p-1" {...props} />
                     ),

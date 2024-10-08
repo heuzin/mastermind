@@ -21,6 +21,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import toast from "react-hot-toast";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -73,8 +74,7 @@ const ProModal = () => {
       window.location.href = response.data.url;
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
-      console.log(error, "STRIPE_CLIENT_ERROR");
-      //   toast.error("Something went wrong.");
+      toast.error("Something went wrong.");
     } finally {
       setLoading(false);
     }

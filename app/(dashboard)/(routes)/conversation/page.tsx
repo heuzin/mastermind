@@ -5,6 +5,7 @@ import * as z from "zod";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { cn } from "@/lib/utils";
+import toast from "react-hot-toast";
 import { MessageSquare } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -52,9 +53,12 @@ const ConversationPage = () => {
 
       setMessages((current) => [...current, userMessage, response.data]);
       form.reset();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error?.response?.status === 403) {
         proModal.onOpen();
+      } else {
+        toast.error("Something went wrong");
       }
     } finally {
       router.refresh();

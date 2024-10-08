@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { DownloadIcon, ImageIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import toast from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import Image from "next/image";
@@ -98,9 +99,12 @@ const ImagePage = () => {
       setImages(urls);
 
       form.reset();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error?.response?.status === 403) {
         proModal.onOpen();
+      } else {
+        toast.error("Something went wrong");
       }
     } finally {
       router.refresh();
